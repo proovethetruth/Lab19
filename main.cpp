@@ -5,12 +5,25 @@
 // последовательность чисел меньше заданного числа
 
 #include <iostream>
-#include "Lab19.h"
+using namespace std;
+
+void GenArrangement(int n, int k, int idx, int used, int arran) {
+    if (idx == k) {
+        std::cout << arran << std::endl;
+        return;
+    }
+
+    for (int i = 0; i < n; i++)
+        if (0 == (used & (1 << i)))
+            GenArrangement(n, k, idx + 1, used | (1 << i), arran * 10 + (i + 1));
+}
 
 int main() {
-	int lenght = 10;
-	char str[] = { 'A', 'B', 'C', 'D' };
-	int n = sizeof str;
-	print_str(str, "", n, lenght);
-	return 0;
+    int n, k;
+    cout << "\n Enter num of elements: ";
+    cin >> n;
+
+    cout << "\n Enter length: ";
+    cin >> k;
+    GenArrangement(n, k, 0, 0, 0);
 }
